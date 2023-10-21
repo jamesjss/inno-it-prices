@@ -57,7 +57,7 @@ public class PricesRepositoryImplTest {
 
         // Configure the behavior of the pricesJpaRepository mock
         when(pricesJpaRepository.findByBrandIdAndProductIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
-                1, 1, localDateTime, localDateTime))
+                1L, 1L, localDateTime, localDateTime))
                 .thenReturn(Collections.singletonList(entity));
 
         // Configure the behavior of the pricesMapper mock
@@ -65,7 +65,7 @@ public class PricesRepositoryImplTest {
                 .thenReturn(Collections.singletonList(expectedPrices));
 
         // Execute the method under test
-        List<Prices> result = pricesRepository.searchByDateProductAndBrand(localDateTime, 1, 1);
+        List<Prices> result = pricesRepository.searchByDateProductAndBrand(localDateTime, 1L, 1L);
 
         // Verify that the expected results are obtained
         assertEquals(1, result.size());

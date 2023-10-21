@@ -7,5 +7,5 @@ import java.util.List;
 
 //Output Port
 public interface PricesRepository {
-    List<Prices> searchByDateProductAndBrand(LocalDateTime dateBetween, Integer productId, Integer brandId);
+    List<Prices> searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId);
 }

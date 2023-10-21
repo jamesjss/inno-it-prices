@@ -22,7 +22,7 @@ public class PricesRepositoryImpl implements PricesRepository {
 
 
     @Override
-    public List<Prices> searchByDateProductAndBrand(LocalDateTime dateBetween, Integer productId, Integer brandId)  {
+    public List<Prices> searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId)  {
         return pricesMapper.toPrices(pricesJpaRepository.findByBrandIdAndProductIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(brandId, productId, dateBetween, dateBetween));
     }
 
