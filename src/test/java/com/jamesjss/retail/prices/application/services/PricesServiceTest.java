@@ -45,7 +45,7 @@ public class PricesServiceTest {
                 .thenReturn(expectedPrices);
 
         // Call the method under test
-        List<Prices> result = pricesService.getByDateProductAndBrand(dateBetween, productId, brandId);
+        List<Prices> result = pricesService.searchByDateProductAndBrand(dateBetween, productId, brandId);
 
         // Verify that the results are as expected
         assertEquals(expectedPrices.size(), result.size());

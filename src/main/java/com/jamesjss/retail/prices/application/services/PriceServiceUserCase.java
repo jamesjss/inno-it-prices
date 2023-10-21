@@ -7,5 +7,5 @@ import java.util.List;
 
 //Input Port
 public interface PriceServiceUserCase {
-    List<Prices> getByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId);
+    List<Prices> searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId);
 }
