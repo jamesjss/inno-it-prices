@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -31,11 +32,16 @@ public class PricesController {
 
     @GetMapping("/search")
     public ResponseEntity<List<Prices>> getPrices(
-            @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd-HH.mm.ss") LocalDateTime startDate,
+            @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd-HH.mm.ss") String startDate,
             @RequestParam("product") Long productId,
             @RequestParam("brand") Long brandId)  {
-        List<Prices> prices = priceServiceUserCase.searchByDateProductAndBrand(startDate, productId, brandId);
-        return ResponseEntity.ok(prices);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
+            LocalDateTime dateTime = LocalDateTime.parse(startDate, formatter);
+
+            List<Prices> prices = priceServiceUserCase.searchByDateProductAndBrand(dateTime, productId, brandId);
+            return ResponseEntity.ok(prices);
+
     }
 
 }
