@@ -1,5 +1,6 @@
 package com.jamesjss.retail.prices.infrastructure.adapter;
 
+import com.jamesjss.retail.prices.application.exception.PriceNotFoundException;
 import com.jamesjss.retail.prices.domain.model.Prices;
 import com.jamesjss.retail.prices.infrastructure.entity.PricesEntity;
 import com.jamesjss.retail.prices.infrastructure.mapper.PricesMapper;
@@ -31,7 +32,7 @@ public class PricesRepositoryImplTest {
     private PricesMapper pricesMapper;
 
     @Test
-    public void testSearchByDateProductAndBrand() {
+    public void testSearchByDateProductAndBrand() throws PriceNotFoundException {
         // Prepare test data and expected behavior for the repository and mapper
 
         // Define test objects

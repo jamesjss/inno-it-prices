@@ -1,5 +1,6 @@
 package com.jamesjss.retail.prices.infrastructure.controller;
 
+import com.jamesjss.retail.prices.application.exception.PriceNotFoundException;
 import com.jamesjss.retail.prices.application.services.PriceServiceUserCase;
 import com.jamesjss.retail.prices.application.services.PricesService;
 import com.jamesjss.retail.prices.domain.model.Prices;
@@ -34,7 +35,7 @@ public class PricesController {
     public ResponseEntity<List<Prices>> getPrices(
             @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd-HH.mm.ss") String startDate,
             @RequestParam("product") Long productId,
-            @RequestParam("brand") Long brandId)  {
+            @RequestParam("brand") Long brandId) throws PriceNotFoundException {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
             LocalDateTime dateTime = LocalDateTime.parse(startDate, formatter);

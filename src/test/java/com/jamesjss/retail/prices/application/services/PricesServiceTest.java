@@ -1,9 +1,8 @@
 package com.jamesjss.retail.prices.application.services;
 
+import com.jamesjss.retail.prices.application.exception.PriceNotFoundException;
 import com.jamesjss.retail.prices.application.repository.PricesRepository;
 import com.jamesjss.retail.prices.domain.model.Prices;
-import com.jamesjss.retail.prices.application.services.PricesService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,7 +30,7 @@ public class PricesServiceTest {
 
 
     @Test
-    public void testGetByDateProductAndBrand() {
+    public void testGetByDateProductAndBrand() throws PriceNotFoundException {
         // Test data
         LocalDateTime dateBetween = LocalDateTime.now();
         Long productId = 1L;

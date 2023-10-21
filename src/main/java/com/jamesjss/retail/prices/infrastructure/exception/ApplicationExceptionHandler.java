@@ -1,5 +1,6 @@
 package com.jamesjss.retail.prices.infrastructure.exception;
 
+import com.jamesjss.retail.prices.application.exception.PriceNotFoundException;
 import com.jamesjss.retail.prices.infrastructure.exception.dto.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,19 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
                 .statusCode(HttpStatus.BAD_REQUEST)
                 .timestamp(LocalDateTime.now())
                 .message("Argument Type Mismatch Error")
-                .details(ex.getMessage())
                 .build();
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ExceptionHandler({PriceNotFoundException.class})
+    public ResponseEntity<ErrorMessage> handlePriceNotFoundException(PriceNotFoundException ex) {
+        ErrorMessage errorMessage = ErrorMessage.builder()
+                .statusCode(HttpStatus.NO_CONTENT)
+                .timestamp(LocalDateTime.now())
+                .message("No record found with the submitted parameters")
+                .build();
+        return new ResponseEntity<>(errorMessage, HttpStatus.NO_CONTENT);
     }
 
 
