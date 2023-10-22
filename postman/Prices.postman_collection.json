@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "20aff86f-44cc-4c4e-a493-4c05da354a68",
+		"name": "Prices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3828278"
+	},
+	"item": [
+		{
+			"name": "Petición 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search?date=2020-06-14-10.00.00&product=35455&brand=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-14-10.00.00"
+						},
+						{
+							"key": "product",
+							"value": "35455"
+						},
+						{
+							"key": "brand",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Petición 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search?date=2020-06-14-16.00.00&product=35455&brand=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-14-16.00.00"
+						},
+						{
+							"key": "product",
+							"value": "35455"
+						},
+						{
+							"key": "brand",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Petición 3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search?date=2020-06-14-21.00.00&product=35455&brand=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-14-21.00.00"
+						},
+						{
+							"key": "product",
+							"value": "35455"
+						},
+						{
+							"key": "brand",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Petición 4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search?date=2020-0615-10.00.00&product=35455&brand=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-0615-10.00.00"
+						},
+						{
+							"key": "product",
+							"value": "35455"
+						},
+						{
+							"key": "brand",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Petición 5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search?date=2020-06-16-21.00.00&product=35455&brand=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-16-21.00.00"
+						},
+						{
+							"key": "product",
+							"value": "35455"
+						},
+						{
+							"key": "brand",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
