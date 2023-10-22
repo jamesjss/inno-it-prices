@@ -1,6 +1,6 @@
 In the company's e-commerce database, we have the "PRICES" table, which reflects the final price (retail price) and the rate that applies to a product of a brand within certain date ranges. Below is an example of the table with the relevant fields:
 
-##PRICES TABLE
+### PRICES TABLE
 
 BRAND_ID  | START_DATE  | END_DATE | PRICE_LIST   | PRODUCT_ID | PRIORITY  | PRICE | CURR
 --------- | ----------- | -------- | ----------   | ---------- | --------  | ----- | --------  | 
@@ -10,7 +10,7 @@ BRAND_ID  | START_DATE  | END_DATE | PRICE_LIST   | PRODUCT_ID | PRIORITY  | PRI
 1 | 2020-06-15-16.00.00  | 2020-12-31-23.59.59  | 4  | 35455  | 1  | 38.95  | EUR
 
 
-###Fields:
+### Fields
 
 - BRAND_ID: A foreign key representing the brand group.
 - START_DATE , END_DATE: Date range during which the specified rate applies.
@@ -20,7 +20,7 @@ BRAND_ID  | START_DATE  | END_DATE | PRICE_LIST   | PRODUCT_ID | PRIORITY  | PRI
 - PRICE: Final retail price.
 - CURR: ISO currency code.
 
-##Requirements
+## Requirements
 
 Build a Spring Boot application/service that provides a REST endpoint for querying as follows:
 
