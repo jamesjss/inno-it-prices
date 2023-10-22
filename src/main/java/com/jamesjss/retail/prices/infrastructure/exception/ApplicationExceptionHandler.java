@@ -30,14 +30,10 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ExceptionHandler({PriceNotFoundException.class})
-    public ResponseEntity<ErrorMessage> handlePriceNotFoundException(PriceNotFoundException ex) {
-        ErrorMessage errorMessage = ErrorMessage.builder()
-                .statusCode(HttpStatus.NO_CONTENT)
-                .timestamp(LocalDateTime.now())
-                .message("No record found with the submitted parameters")
-                .build();
-        return new ResponseEntity<>(errorMessage, HttpStatus.NO_CONTENT);
+    public ResponseEntity<Void> handlePriceNotFoundException(PriceNotFoundException ex) {
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 
 
 }
