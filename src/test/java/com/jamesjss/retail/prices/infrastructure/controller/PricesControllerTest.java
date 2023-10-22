@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jamesjss.retail.prices.domain.model.Prices;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -30,6 +31,7 @@ class PricesControllerTest {
 
     private static final String BASE_URL = "/api/prices/search";
 
+    @DisplayName("First test required by the technical test")
     @Test
     public void testGetPriceAtSpecificTimeTest1() throws Exception {
 
@@ -73,6 +75,7 @@ class PricesControllerTest {
     }
 
 
+    @DisplayName("Second test required by the technical test")
     @Test
     public void testGetPriceAtSpecificTimeTest2() throws Exception {
 
@@ -114,6 +117,7 @@ class PricesControllerTest {
     }
 
 
+    @DisplayName("Third test required by the technical test")
     @Test
     public void testGetPriceAtSpecificTimeTest3() throws Exception {
 
@@ -155,6 +159,7 @@ class PricesControllerTest {
     }
 
 
+    @DisplayName("Fourth test required by the technical test")
     @Test
     public void testGetPriceAtSpecificTimeTest4() throws Exception {
 
@@ -196,6 +201,7 @@ class PricesControllerTest {
     }
 
 
+    @DisplayName("Fifth test required by the technical test")
     @Test
     public void testGetPriceAtSpecificTimeTest5() throws Exception {
 
@@ -237,6 +243,7 @@ class PricesControllerTest {
     }
 
 
+    @DisplayName("Testing of exception PriceNotFoundException")
     @Test
     public void testPriceNotFoundException() throws Exception {
         // Attempts to find a price on a date where it does not exist
@@ -254,6 +261,7 @@ class PricesControllerTest {
     }
 
 
+    @DisplayName("Testing Future Date")
     @Test
     public void testUpperDateLimit() throws Exception {
         // Try to find a price at a future date (upper limit).
@@ -271,9 +279,10 @@ class PricesControllerTest {
     }
 
 
+    @DisplayName("Testing Past Date")
     @Test
     public void testLowerDateLimit() throws Exception {
-        // Try to find a price at a future date (upper limit).
+        // Try to find a price at a past date (lower limit).
         String dateTimeStr = "2012-12-31-23.59.59"; // Date in the future
         Long targetProductId = 35455L;
         Long targetBrandId = 1L;
@@ -287,6 +296,7 @@ class PricesControllerTest {
     }
 
 
+    @DisplayName("Testing Invalid Date Format")
     @Test
     public void testInvalidDateFormat() throws Exception {
         // Attempts to search for a price with an incorrect date format
@@ -299,6 +309,42 @@ class PricesControllerTest {
                         .param("date", dateTimeStr)
                         .param("product", String.valueOf(targetProductId))
                         .param("brand", String.valueOf(targetBrandId)))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+
+    @DisplayName("Testing Invalid Product Format")
+    @Test
+    public void testInvalidProductFormat() throws Exception {
+        // Attempts to search for a price with an incorrect date format
+        String dateTimeStr = "2020-06-14-08.00.00";
+        String targetProductId = "ProductText"; // Incorrect format
+        Long targetBrandId = 1L;
+
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("date", dateTimeStr)
+                        .param("product", targetProductId)
+                        .param("brand", String.valueOf(targetBrandId)))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+
+    @DisplayName("Testing Invalid Brand Format")
+    @Test
+    public void testInvalidPBrandFormat() throws Exception {
+        // Attempts to search for a price with an incorrect date format
+        String dateTimeStr = "2020-06-14-08.00.00";
+        Long targetProductId = 35455L;
+        String targetBrandId = "BrandText"; // Incorrect format
+
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("date", dateTimeStr)
+                        .param("product", String.valueOf(targetProductId))
+                        .param("brand", targetBrandId))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
