@@ -1,5 +1,6 @@
 package com.jamesjss.retail.prices.domain.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(name = "Prices", description = "Product price data")
 public class Prices {
     private Long productId;
     private Long brandId;
