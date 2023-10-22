@@ -18,6 +18,7 @@
 		<version.mapstruct>1.5.3.Final</version.mapstruct>
 		<version.lombok>1.18.26</version.lombok>
 		<version.mapstruct-lombok>0.2.0</version.mapstruct-lombok>
+		<version.jackson-databind>2.15.1</version.jackson-databind>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -64,6 +65,15 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok-mapstruct-binding</artifactId>
 			<version>${version.mapstruct-lombok}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${version.jackson-databind}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 	</dependencies>
 
