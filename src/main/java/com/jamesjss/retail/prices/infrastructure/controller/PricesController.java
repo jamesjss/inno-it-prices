@@ -39,7 +39,7 @@ public class PricesController {
             description = "Retrieves available prices for a specific date, product and brand.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Prices found"),
-                    @ApiResponse(responseCode = "204", description = "Prices not found"),
+                    @ApiResponse(responseCode = "404", description = "Prices not found"),
                     @ApiResponse(responseCode = "400", description = "Bad Request")
             }
     )
