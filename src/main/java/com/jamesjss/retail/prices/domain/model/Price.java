@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Schema(name = "Prices", description = "Product price data")
-public class Prices {
+public class Price {
     private Long productId;
     private Long brandId;
     private Integer priceList;

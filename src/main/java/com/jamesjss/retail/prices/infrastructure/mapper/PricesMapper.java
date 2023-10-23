@@ -1,12 +1,10 @@
 package com.jamesjss.retail.prices.infrastructure.mapper;
 
-import com.jamesjss.retail.prices.domain.model.Prices;
-import com.jamesjss.retail.prices.infrastructure.entity.PricesEntity;
+import com.jamesjss.retail.prices.domain.model.Price;
+import com.jamesjss.retail.prices.infrastructure.entity.PriceEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PricesMapper {
@@ -22,6 +20,6 @@ public interface PricesMapper {
             }
 
     )
-    Prices toPrices (PricesEntity pricesEntity);
+    Price toPrice (PriceEntity priceEntity);
 
 }

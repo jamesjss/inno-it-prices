@@ -2,13 +2,11 @@ package com.jamesjss.retail.prices.infrastructure.controller;
 
 import com.jamesjss.retail.prices.application.exception.PriceNotFoundException;
 import com.jamesjss.retail.prices.application.services.PriceServiceUserCase;
-import com.jamesjss.retail.prices.application.services.PricesService;
-import com.jamesjss.retail.prices.domain.model.Prices;
+import com.jamesjss.retail.prices.domain.model.Price;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,18 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 @Tag(name = "Prices", description = "Transactions related to product prices")
 
-public class PricesController {
+public class PriceController {
 
     //Input port
     private final PriceServiceUserCase priceServiceUserCase;
 
-    public PricesController(PriceServiceUserCase priceServiceUserCase) {
+    public PriceController(PriceServiceUserCase priceServiceUserCase) {
         this.priceServiceUserCase = priceServiceUserCase;
     }
 
@@ -44,7 +41,7 @@ public class PricesController {
             }
     )
     @GetMapping("/prices")
-    public ResponseEntity<Prices> getPrices(
+    public ResponseEntity<Price> getPrices(
             @Parameter(description = "Date of request", example = "2020-06-14-10.00.00")
             @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd-HH.mm.ss") String startDate,
 
@@ -59,8 +56,8 @@ public class PricesController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
             LocalDateTime dateTime = LocalDateTime.parse(startDate, formatter);
 
-            Prices prices = priceServiceUserCase.searchByDateProductAndBrand(dateTime, productId, brandId);
-            return ResponseEntity.ok(prices);
+            Price price = priceServiceUserCase.searchByDateProductAndBrand(dateTime, productId, brandId);
+            return ResponseEntity.ok(price);
 
     }
 
