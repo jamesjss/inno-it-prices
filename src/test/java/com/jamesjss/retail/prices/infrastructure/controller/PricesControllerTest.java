@@ -1,9 +1,8 @@
 package com.jamesjss.retail.prices.infrastructure.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.jamesjss.retail.prices.domain.model.Prices;
+import com.jamesjss.retail.prices.infrastructure.dto.PriceDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -31,9 +29,9 @@ class PricesControllerTest {
 
     private static final String BASE_URL = "/api/prices";
 
-    @DisplayName("First test required by the technical test")
+    @DisplayName("Request at 10:00 a.m. on the 14th for product 35455 for brand 1")
     @Test
-    public void testGetPriceAtSpecificTimeTest1() throws Exception {
+    public void testSearchPriceAtTime_2020_06_14_10_00_00() throws Exception {
 
 
         //Date of request
@@ -52,32 +50,26 @@ class PricesControllerTest {
                         .param("brand", String.valueOf(targetBrandId)))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(1))
                 .andReturn();
 
         //Transformation from json to Price List
         String responseContent = mvcResult.getResponse().getContentAsString();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        List<Prices> response = objectMapper.readValue(responseContent, new TypeReference<>() {});
+        PriceDto priceResponse = objectMapper.readValue(responseContent, PriceDto.class);
 
-        boolean allMatch = response.stream().allMatch( price -> {
-            // Comparison of all values
-            return  targetDateTime.isAfter(price.getStartDate()) &&
-                    targetDateTime.isBefore(price.getEndDate()) &&
-                    targetBrandId.equals(price.getBrandId()) &&
-                    targetProductId.equals(price.getProductId());
-        });
 
-        //Assert of all previous comparisons
-        assertTrue(allMatch);
+        assertTrue(targetDateTime.isAfter(priceResponse.getStartDate()) &&
+                targetDateTime.isBefore(priceResponse.getEndDate()) &&
+                targetBrandId.equals(priceResponse.getBrandId()) &&
+                targetProductId.equals(priceResponse.getProductId()));
 
     }
 
 
-    @DisplayName("Second test required by the technical test")
+    @DisplayName("Request at 16:00 on the 14th of the day for product 35455 for brand 1")
     @Test
-    public void testGetPriceAtSpecificTimeTest2() throws Exception {
+    public void testSearchPriceAtTime_2020_06_14_16_00_00() throws Exception {
 
         //Date of request
         String dateTimeStr = "2020-06-14-16.00.00";
@@ -95,31 +87,26 @@ class PricesControllerTest {
                         .param("brand", String.valueOf(targetBrandId)))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(2))
                 .andReturn();
 
         //Transformation from json to Price List
         String responseContent = mvcResult.getResponse().getContentAsString();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        List<Prices> response = objectMapper.readValue(responseContent, new TypeReference<>() {});
+        PriceDto priceResponse = objectMapper.readValue(responseContent, PriceDto.class);
 
-        boolean allMatch = response.stream().allMatch( price -> {
-            // Comparison of all values
-            return  targetDateTime.isAfter(price.getStartDate()) &&
-                    targetDateTime.isBefore(price.getEndDate()) &&
-                    targetBrandId.equals(price.getBrandId()) &&
-                    targetProductId.equals(price.getProductId());
-        });
 
-        //Assert of all previous comparisons
-        assertTrue(allMatch);
+        assertTrue(targetDateTime.isAfter(priceResponse.getStartDate()) &&
+                targetDateTime.isBefore(priceResponse.getEndDate()) &&
+                targetBrandId.equals(priceResponse.getBrandId()) &&
+                targetProductId.equals(priceResponse.getProductId()));
+
     }
 
 
-    @DisplayName("Third test required by the technical test")
+    @DisplayName("Request at 21:00 on the 14th of the day of the product 35455 for brand 1")
     @Test
-    public void testGetPriceAtSpecificTimeTest3() throws Exception {
+    public void testSearchPriceAtTime_2020_06_14_21_00_00() throws Exception {
 
         //Date of request
         String dateTimeStr = "2020-06-14-21.00.00";
@@ -137,31 +124,26 @@ class PricesControllerTest {
                         .param("brand", String.valueOf(targetBrandId)))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(1))
                 .andReturn();
 
         //Transformation from json to Price List
         String responseContent = mvcResult.getResponse().getContentAsString();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        List<Prices> response = objectMapper.readValue(responseContent, new TypeReference<>() {});
+        PriceDto priceResponse = objectMapper.readValue(responseContent, PriceDto.class);
 
-        boolean allMatch = response.stream().allMatch( price -> {
-            // Comparison of all values
-            return  targetDateTime.isAfter(price.getStartDate()) &&
-                    targetDateTime.isBefore(price.getEndDate()) &&
-                    targetBrandId.equals(price.getBrandId()) &&
-                    targetProductId.equals(price.getProductId());
-        });
 
-        //Assert of all previous comparisons
-        assertTrue(allMatch);
+        assertTrue(targetDateTime.isAfter(priceResponse.getStartDate()) &&
+                targetDateTime.isBefore(priceResponse.getEndDate()) &&
+                targetBrandId.equals(priceResponse.getBrandId()) &&
+                targetProductId.equals(priceResponse.getProductId()));
+
     }
 
 
-    @DisplayName("Fourth test required by the technical test")
+    @DisplayName("Request at 10:00 on the 15th of the day of the product 35455 for brand 1")
     @Test
-    public void testGetPriceAtSpecificTimeTest4() throws Exception {
+    public void testSearchPriceAtTime_2020_06_15_10_00_00() throws Exception {
 
         //Date of request
         String dateTimeStr = "2020-06-15-10.00.00";
@@ -179,31 +161,27 @@ class PricesControllerTest {
                         .param("brand", String.valueOf(targetBrandId)))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(2))
                 .andReturn();
 
         //Transformation from json to Price List
         String responseContent = mvcResult.getResponse().getContentAsString();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        List<Prices> response = objectMapper.readValue(responseContent, new TypeReference<>() {});
+        PriceDto priceResponse = objectMapper.readValue(responseContent, PriceDto.class);
 
-        boolean allMatch = response.stream().allMatch( price -> {
-            // Comparison of all values
-            return  targetDateTime.isAfter(price.getStartDate()) &&
-                    targetDateTime.isBefore(price.getEndDate()) &&
-                    targetBrandId.equals(price.getBrandId()) &&
-                    targetProductId.equals(price.getProductId());
-        });
 
-        //Assert of all previous comparisons
-        assertTrue(allMatch);
+        assertTrue(targetDateTime.isAfter(priceResponse.getStartDate()) &&
+                targetDateTime.isBefore(priceResponse.getEndDate()) &&
+                targetBrandId.equals(priceResponse.getBrandId()) &&
+                targetProductId.equals(priceResponse.getProductId()));
+
+
     }
 
 
-    @DisplayName("Fifth test required by the technical test")
+    @DisplayName("Request at 21:00 on the 16th of the day of product 35455 for brand 1")
     @Test
-    public void testGetPriceAtSpecificTimeTest5() throws Exception {
+    public void testSearchPriceAtTime_2020_06_16_21_00_00() throws Exception {
 
         //Date of request
         String dateTimeStr = "2020-06-16-21.00.00";
@@ -221,25 +199,21 @@ class PricesControllerTest {
                         .param("brand", String.valueOf(targetBrandId)))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(2))
                 .andReturn();
 
         //Transformation from json to Price List
         String responseContent = mvcResult.getResponse().getContentAsString();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        List<Prices> response = objectMapper.readValue(responseContent, new TypeReference<>() {});
+        PriceDto priceResponse = objectMapper.readValue(responseContent, PriceDto.class);
 
-        boolean allMatch = response.stream().allMatch( price -> {
-            // Comparison of all values
-            return  targetDateTime.isAfter(price.getStartDate()) &&
-                    targetDateTime.isBefore(price.getEndDate()) &&
-                    targetBrandId.equals(price.getBrandId()) &&
-                    targetProductId.equals(price.getProductId());
-        });
 
-        //Assert of all previous comparisons
-        assertTrue(allMatch);
+        assertTrue(targetDateTime.isAfter(priceResponse.getStartDate()) &&
+                targetDateTime.isBefore(priceResponse.getEndDate()) &&
+                targetBrandId.equals(priceResponse.getBrandId()) &&
+                targetProductId.equals(priceResponse.getProductId()));
+
+
     }
 
 
@@ -257,7 +231,7 @@ class PricesControllerTest {
                         .param("product", String.valueOf(targetProductId))
                         .param("brand", String.valueOf(targetBrandId)))
                 .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isNoContent());
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
 
@@ -275,7 +249,7 @@ class PricesControllerTest {
                         .param("product", String.valueOf(targetProductId))
                         .param("brand", String.valueOf(targetBrandId)))
                 .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isNoContent());
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
 
@@ -292,7 +266,7 @@ class PricesControllerTest {
                         .param("date", dateTimeStr)
                         .param("product", String.valueOf(targetProductId))
                         .param("brand", String.valueOf(targetBrandId)))
-                .andExpect(MockMvcResultMatchers.status().isNoContent());
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
 
@@ -345,6 +319,18 @@ class PricesControllerTest {
                         .param("date", dateTimeStr)
                         .param("product", String.valueOf(targetProductId))
                         .param("brand", targetBrandId))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+
+    @DisplayName("Test Missing Request parameters")
+    @Test
+    public void testMissingRequestParameters() throws Exception {
+        // Attempts to search witouth parameters
+
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
