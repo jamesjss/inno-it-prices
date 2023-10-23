@@ -1,4 +1,4 @@
-package com.jamesjss.retail.prices.domain.model;
+package com.jamesjss.retail.prices.infrastructure.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -13,14 +13,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Price {
+@Schema(name = "Price", description = "Product price data")
+public class PriceDto {
     private Long productId;
     private Long brandId;
     private Integer priceList;
-    private Integer priority;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private BigDecimal price;
-    private String curr;
+    private String price;
 
 }
