@@ -8,5 +8,5 @@ import java.util.List;
 
 //Input Port
 public interface PriceServiceUserCase {
-    List<Prices> searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId) throws PriceNotFoundException;
+    Prices searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId) throws PriceNotFoundException;
 }

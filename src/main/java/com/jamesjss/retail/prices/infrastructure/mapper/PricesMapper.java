@@ -15,12 +15,13 @@ public interface PricesMapper {
                     @Mapping(source = "productId", target = "productId"),
                     @Mapping(source = "brandId", target = "brandId"),
                     @Mapping(source = "priceList", target = "priceList"),
+                    @Mapping(source = "priority", target = "priority"),
                     @Mapping(source = "startDate", target = "startDate"),
                     @Mapping(source = "endDate", target = "endDate"),
                     @Mapping(source = "price", target = "price")
             }
 
     )
-    List<Prices> toPrices (List<PricesEntity> pricesEntity);
+    Prices toPrices (PricesEntity pricesEntity);
 
 }

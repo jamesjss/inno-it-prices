@@ -8,5 +8,5 @@ import java.util.List;
 
 //Output Port
 public interface PricesRepository {
-    List<Prices> searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId) throws PriceNotFoundException;
+    Prices searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId) throws PriceNotFoundException;
 }

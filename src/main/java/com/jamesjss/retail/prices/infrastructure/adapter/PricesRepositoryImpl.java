@@ -3,11 +3,13 @@ package com.jamesjss.retail.prices.infrastructure.adapter;
 import com.jamesjss.retail.prices.application.exception.PriceNotFoundException;
 import com.jamesjss.retail.prices.application.repository.PricesRepository;
 import com.jamesjss.retail.prices.domain.model.Prices;
+import com.jamesjss.retail.prices.infrastructure.entity.PricesEntity;
 import com.jamesjss.retail.prices.infrastructure.mapper.PricesMapper;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Comparator;
+import java.util.Optional;
 
 @Repository
 public class PricesRepositoryImpl implements PricesRepository {
@@ -23,14 +25,20 @@ public class PricesRepositoryImpl implements PricesRepository {
 
 
     @Override
-    public List<Prices> searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId) throws PriceNotFoundException {
-        List<Prices> prices = pricesMapper.toPrices(pricesJpaRepository.findByBrandIdAndProductIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(brandId, productId, dateBetween, dateBetween));
+    public Prices searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId) throws PriceNotFoundException {
 
-        if (prices.isEmpty()) {
+        Optional<PricesEntity> priceResult = pricesJpaRepository.findByBrandIdAndProductIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(brandId, productId, dateBetween, dateBetween)
+                .stream()
+                .sorted(Comparator.comparing(PricesEntity::getPriority).reversed())
+                .findFirst();
+
+
+
+        if (!priceResult.isPresent()) {
             throw new PriceNotFoundException("No prices were found for the parameters provided");
         }
 
-        return prices;
+        return pricesMapper.toPrices(priceResult.get());
     }
 
 }

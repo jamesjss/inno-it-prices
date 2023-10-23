@@ -44,7 +44,7 @@ public class PricesController {
             }
     )
     @GetMapping("/prices")
-    public ResponseEntity<List<Prices>> getPrices(
+    public ResponseEntity<Prices> getPrices(
             @Parameter(description = "Date of request", example = "2020-06-14-10.00.00")
             @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd-HH.mm.ss") String startDate,
 
@@ -59,7 +59,7 @@ public class PricesController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
             LocalDateTime dateTime = LocalDateTime.parse(startDate, formatter);
 
-            List<Prices> prices = priceServiceUserCase.searchByDateProductAndBrand(dateTime, productId, brandId);
+            Prices prices = priceServiceUserCase.searchByDateProductAndBrand(dateTime, productId, brandId);
             return ResponseEntity.ok(prices);
 
     }

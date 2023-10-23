@@ -16,7 +16,7 @@ public class PricesService implements PriceServiceUserCase {
     }
 
     @Override
-    public List<Prices> searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId) throws PriceNotFoundException {
+    public Prices searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId) throws PriceNotFoundException {
         return pricesRepository.searchByDateProductAndBrand(dateBetween, productId, brandId);
     }
 
