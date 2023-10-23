@@ -26,10 +26,6 @@ import java.util.List;
 
 public class PricesController {
 
-
-    @Autowired
-    PricesService pricesServiceImpl;
-
     //Input port
     private final PriceServiceUserCase priceServiceUserCase;
 
