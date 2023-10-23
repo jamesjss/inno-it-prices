@@ -4,7 +4,7 @@ import com.jamesjss.retail.prices.application.exception.PriceNotFoundException;
 import com.jamesjss.retail.prices.application.repository.PriceRepository;
 import com.jamesjss.retail.prices.domain.model.Price;
 import com.jamesjss.retail.prices.infrastructure.entity.PriceEntity;
-import com.jamesjss.retail.prices.infrastructure.mapper.PricesMapper;
+import com.jamesjss.retail.prices.infrastructure.mapper.PriceMapper;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -16,11 +16,11 @@ public class PriceRepositoryImpl implements PriceRepository {
 
 
     private final PriceJpaRepository priceJpaRepository;
-    private final PricesMapper pricesMapper;
+    private final PriceMapper priceMapper;
 
-    public PriceRepositoryImpl(PriceJpaRepository priceJpaRepository, PricesMapper pricesMapper) {
+    public PriceRepositoryImpl(PriceJpaRepository priceJpaRepository, PriceMapper priceMapper) {
         this.priceJpaRepository = priceJpaRepository;
-        this.pricesMapper = pricesMapper;
+        this.priceMapper = priceMapper;
     }
 
 
@@ -36,7 +36,7 @@ public class PriceRepositoryImpl implements PriceRepository {
                         () -> new PriceNotFoundException("No prices were found for the parameters provided")
                 ));
 
-        return pricesMapper.toPrice(priceResult.get());
+        return priceMapper.toPrice(priceResult.get());
     }
 
 }

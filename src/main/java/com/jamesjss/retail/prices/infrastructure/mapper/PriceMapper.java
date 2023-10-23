@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
-public interface PricesMapper {
+public interface PriceMapper {
     @Mappings(
             {
                     @Mapping(source = "productId", target = "productId"),
@@ -16,7 +16,7 @@ public interface PricesMapper {
                     @Mapping(source = "priority", target = "priority"),
                     @Mapping(source = "startDate", target = "startDate"),
                     @Mapping(source = "endDate", target = "endDate"),
-                    @Mapping(source = "price", target = "price")
+                    @Mapping(source = "price", target = "price"),
             }
 
     )
