@@ -29,7 +29,7 @@ class PricesControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private static final String BASE_URL = "/api/prices/search";
+    private static final String BASE_URL = "/api/prices";
 
     @DisplayName("First test required by the technical test")
     @Test

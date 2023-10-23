@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/prices")
+@RequestMapping("/api")
 @Tag(name = "Prices", description = "Transactions related to product prices")
 
 public class PricesController {
@@ -43,7 +43,7 @@ public class PricesController {
                     @ApiResponse(responseCode = "400", description = "Bad Request")
             }
     )
-    @GetMapping("/search")
+    @GetMapping("/prices")
     public ResponseEntity<List<Prices>> getPrices(
             @Parameter(description = "Date of request", example = "2020-06-14-10.00.00")
             @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd-HH.mm.ss") String startDate,
