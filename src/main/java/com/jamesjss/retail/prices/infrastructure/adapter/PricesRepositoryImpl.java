@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -27,16 +28,14 @@ public class PricesRepositoryImpl implements PricesRepository {
     @Override
     public Prices searchByDateProductAndBrand(LocalDateTime dateBetween, Long productId, Long brandId) throws PriceNotFoundException {
 
-        Optional<PricesEntity> priceResult = pricesJpaRepository.findByBrandIdAndProductIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(brandId, productId, dateBetween, dateBetween)
+        Optional<PricesEntity> priceResult = Optional.ofNullable(pricesJpaRepository.findByBrandIdAndProductId(brandId, productId)
                 .stream()
+                .filter(price -> dateBetween.isAfter(price.getStartDate()) && dateBetween.isBefore(price.getEndDate()))
                 .sorted(Comparator.comparing(PricesEntity::getPriority).reversed())
-                .findFirst();
-
-
-
-        if (!priceResult.isPresent()) {
-            throw new PriceNotFoundException("No prices were found for the parameters provided");
-        }
+                .findFirst()
+                .orElseThrow(
+                        () -> new PriceNotFoundException("No prices were found for the parameters provided")
+                ));
 
         return pricesMapper.toPrices(priceResult.get());
     }
