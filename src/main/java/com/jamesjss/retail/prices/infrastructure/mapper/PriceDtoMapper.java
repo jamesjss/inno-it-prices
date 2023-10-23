@@ -2,10 +2,9 @@ package com.jamesjss.retail.prices.infrastructure.mapper;
 
 import com.jamesjss.retail.prices.domain.model.Price;
 import com.jamesjss.retail.prices.infrastructure.dto.PriceDto;
-import org.mapstruct.*;
-
-import java.math.BigDecimal;
-import java.text.ParseException;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public interface PriceDtoMapper {
