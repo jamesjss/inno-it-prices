@@ -30,8 +30,7 @@ public class PriceRepositoryImpl implements PriceRepository {
         Optional<PriceEntity> priceResult = Optional.ofNullable(priceJpaRepository.findByBrandIdAndProductId(brandId, productId)
                 .stream()
                 .filter(price -> dateBetween.isAfter(price.getStartDate()) && dateBetween.isBefore(price.getEndDate()))
-                .sorted(Comparator.comparing(PriceEntity::getPriority).reversed())
-                .findFirst()
+                .max(Comparator.comparing(PriceEntity::getPriority))
                 .orElseThrow(
                         () -> new PriceNotFoundException("No prices were found for the parameters provided")
                 ));
