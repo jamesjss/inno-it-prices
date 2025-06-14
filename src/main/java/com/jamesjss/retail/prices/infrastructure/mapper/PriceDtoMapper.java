@@ -8,19 +8,14 @@ import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public interface PriceDtoMapper {
-    @Mappings(
-            {
-                    @Mapping(source = "productId", target = "productId"),
-                    @Mapping(source = "brandId", target = "brandId"),
-                    @Mapping(source = "priceList", target = "priceList"),
-                    @Mapping(source = "startDate", target = "startDate"),
-                    @Mapping(source = "endDate", target = "endDate"),
-                    @Mapping( target = "price", expression = "java(price.getPrice().toString() + \" \" + price.getCurr())")
 
-            }
-
-    )
+    @Mappings({
+            @Mapping(source = "productId", target = "productId"),
+            @Mapping(source = "brandId", target = "brandId"),
+            @Mapping(source = "priceList", target = "priceList"),
+            @Mapping(source = "startDate", target = "startDate"),
+            @Mapping(source = "endDate", target = "endDate"),
+            @Mapping(target = "price", expression = "java(price.price().toString() + \" \" + price.curr())")
+    })
     PriceDto toPrice(Price price);
-
 }
-
